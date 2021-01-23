@@ -1,6 +1,6 @@
 No English support :(
 
-# ZoomAutoRecorder
+# Zoom Otomatik Kaydedici (ZOK)
 Bu program, Zoom ve EBA derslerini/toplantılarını otomatik açmakta ve isteğe bağlı olarak OBS Studio aracılığıyla kaydetmektedir. Zaman periyodları ayarlanarak kolayca kullanılabilir.
 
 # Nasıl Kurulur?
