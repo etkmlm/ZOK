@@ -95,7 +95,7 @@ namespace ZoomAutoRecorder
 
         private void btnSecret_Click(object sender, EventArgs e)
         {
-            MainClass.openForm(new Secret());
+            MainClass.OpenForm(new Secret());
         }
     }
 }

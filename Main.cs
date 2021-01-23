@@ -124,7 +124,7 @@ namespace ZoomAutoRecorder
                     {
                         string[] tpass = Properties.Settings.Default.TCKNPASS.Split('#');
                         if (tpass.Length != 2) return false;
-                        new Browser(MainClass.Decrypt(tpass[0]), MainClass.Decrypt(tpass[1]), false).ShowDialog();
+                        new Browser(Encryption.Decrypt(tpass[0]), Encryption.Decrypt(tpass[1]), false).ShowDialog();
                     }
                     else
                     {
@@ -283,12 +283,12 @@ namespace ZoomAutoRecorder
         {
 
 
-            MainClass.openForm(new Settings());
+            MainClass.OpenForm(new Settings());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainClass.openForm(new Lessons());
+            MainClass.OpenForm(new Lessons());
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -428,7 +428,7 @@ namespace ZoomAutoRecorder
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MainClass.openForm(new SetProgram());
+            MainClass.OpenForm(new SetProgram());
         }
 
         private void btnAppClose_Click(object sender, EventArgs e)
@@ -575,7 +575,7 @@ namespace ZoomAutoRecorder
             string[] tcknpass = Properties.Settings.Default.TCKNPASS.Split('#');
             if (tcknpass.Count() == 2)
             {
-                new Browser(MainClass.Decrypt(tcknpass[0]), MainClass.Decrypt(tcknpass[1]), true).Show();
+                new Browser(Encryption.Decrypt(tcknpass[0]), Encryption.Decrypt(tcknpass[1]), true).Show();
                 this.WindowState = FormWindowState.Minimized;
             }
             else

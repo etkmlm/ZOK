@@ -23,8 +23,8 @@ namespace ZoomAutoRecorder
             if (result == DialogResult.Cancel) (sender as Secret).Close();
             try
             {
-                txtTC.Text = MainClass.Decrypt(Properties.Settings.Default.TCKNPASS.Split('#')[0]);
-                txtPass.Text = MainClass.Decrypt(Properties.Settings.Default.TCKNPASS.Split('#')[1]);
+                txtTC.Text = Encryption.Decrypt(Properties.Settings.Default.TCKNPASS.Split('#')[0]);
+                txtPass.Text = Encryption.Decrypt(Properties.Settings.Default.TCKNPASS.Split('#')[1]);
             }
             catch (Exception)
             {
@@ -46,8 +46,8 @@ namespace ZoomAutoRecorder
                     MessageBox.Show("Lütfen TC'nizi düzgün formatta girin.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string tckn = MainClass.Encrypt(txtTC.Text);
-                string pass = MainClass.Encrypt(txtPass.Text).Replace(" ", "");
+                string tckn = Encryption.Encrypt(txtTC.Text);
+                string pass = Encryption.Encrypt(txtPass.Text).Replace(" ", "");
                 Properties.Settings.Default.TCKNPASS = tckn + "#" + pass;
                 Properties.Settings.Default.Save();
                 this.Close();
