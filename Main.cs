@@ -162,11 +162,10 @@ namespace ZoomAutoRecorder
                 if (withOBS)
                 {
                     var obs = Process.GetProcessesByName("obs64").ToList();
-                    if (obs.Count > 0)
-                    {
-                        System.Threading.Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.KZA * 1000)); //OBS Zaman Aşımı 
-                        obs.ForEach(x => x.Kill());
-                    }
+                    var obs32 = Process.GetProcessesByName("obs64").ToList();
+                    Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.KZA * 1000)); //OBS Zaman Aşımı 
+                    obs.ForEach(x => x.Kill());
+                    obs32.ForEach(x => x.Kill());
                 }
             }
             catch (Exception)
