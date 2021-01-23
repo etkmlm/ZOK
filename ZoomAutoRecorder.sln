@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomAutoRecorder", "ZoomAutoRecorder.csproj", "{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ZoomAutoRecorderSetup", "..\ZoomAutoRecorderSetup\ZoomAutoRecorderSetup.vdproj", "{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|x64.ActiveCfg = Debug|x64
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|x64.Build.0 = Debug|x64
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|x86.ActiveCfg = Debug|x86
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Debug|x86.Build.0 = Debug|x86
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|x64.ActiveCfg = Release|x64
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|x64.Build.0 = Release|x64
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|x86.ActiveCfg = Release|x86
+		{3B2114B2-AC3A-4E3A-AE5B-8D3719B3647F}.Release|x86.Build.0 = Release|x86
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Debug|Any CPU.ActiveCfg = Debug
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Debug|x64.ActiveCfg = Debug
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Debug|x86.ActiveCfg = Debug
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|Any CPU.ActiveCfg = Release
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|x64.ActiveCfg = Release
+		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39AB2905-62C9-44A3-AC3A-3AB0C577D5B4}
+	EndGlobalSection
+EndGlobal
