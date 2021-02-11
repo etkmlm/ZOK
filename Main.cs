@@ -112,7 +112,7 @@ namespace ZoomAutoRecorder
 
         }
 
-        public Task<bool> startLesson(bool withOBS, bool ebaMode, int id)
+        public Task<bool> StartLesson(bool withOBS, bool ebaMode, int id)
         {
             return Task.Run(() =>
             {
@@ -133,14 +133,16 @@ namespace ZoomAutoRecorder
                         string link = "https://us04web.zoom.us/j/" + lesson_id + "?pwd=" + pass;
                         Process.Start(string.Format("zoommtg://zoom.us/join?confno={0}&pwd={1}&zc=0", lesson_id, pass));
                     }
-                    string path = Path.GetDirectoryName(Properties.Settings.Default.OBSPath);
-                    if (withOBS && File.Exists(path))
+                    string path = Properties.Settings.Default.OBSPath;
+                    if (withOBS && File.Exists(Properties.Settings.Default.OBSPath))
                     {
                         Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.KZA * 1000)); //OBS Zaman Aşımı 
-                        var info = new ProcessStartInfo();
-                        info.WorkingDirectory = path;
-                        info.FileName = Properties.Settings.Default.OBSPath;
-                        info.Arguments = "--startrecording";
+                        var info = new ProcessStartInfo
+                        {
+                            WorkingDirectory = Path.GetDirectoryName(path),
+                            FileName = Properties.Settings.Default.OBSPath,
+                            Arguments = "--startrecording"
+                        };
                         Process.Start(info);
                     }
                     return true;
@@ -215,7 +217,7 @@ namespace ZoomAutoRecorder
                         var data = getInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={day - 1} AND [Order]={ix}");
                         if (data == null) return;
                         isEBA = Convert.ToBoolean(data);
-                        Task tsk = startLesson(true, isEBA, id);
+                        Task tsk = StartLesson(true, isEBA, id);
                         tsk.Wait();
                         isStarted = true;
                         delay = 5300;
@@ -353,7 +355,7 @@ namespace ZoomAutoRecorder
                     }
                     if (!y) return;
                 }
-                startLesson(Properties.Settings.Default.RecordLesson, check, Lesson_IDs[index]).Wait();
+                StartLesson(Properties.Settings.Default.RecordLesson, check, Lesson_IDs[index]).Wait();
                 if (backgroundWorker1.IsBusy)
                 {
                     isStarted = true;
@@ -420,7 +422,7 @@ namespace ZoomAutoRecorder
             if (Control.ModifierKeys == Keys.Shift && lbDersler.SelectedItems.Count > 0)
             {
                 int id = Lesson_IDs[lbDersler.SelectedIndex];
-                startLesson(false, false, id);
+                StartLesson(false, false, id);
                 lbDersler.SelectedIndex = -1;
             }
         }
