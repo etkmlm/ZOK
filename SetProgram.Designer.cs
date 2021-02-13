@@ -53,7 +53,7 @@ namespace ZoomAutoRecorder
             this.nudLessonNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.nudLessonNumber.Location = new System.Drawing.Point(258, 12);
             this.nudLessonNumber.Maximum = new decimal(new int[] {
-            12,
+            20,
             0,
             0,
             0});
