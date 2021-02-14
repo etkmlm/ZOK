@@ -17,7 +17,9 @@ namespace ZoomAutoRecorder
         {
             InitializeComponent();
         }
+
         OleDbConnection bg = new OleDbConnection(MainClass.conn);
+
         private void Clear()
         {
             lvLessons.Items.Clear();
@@ -51,12 +53,10 @@ namespace ZoomAutoRecorder
             tip.SetToolTip(txtZoomPass, "Link içinde bulunan saf parolanın şifrelenmiş halini girin.");
             RefreshLessons();
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshLessons();
         }
-
         private void btnSolve_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(btnSolve.Text))
@@ -71,7 +71,6 @@ namespace ZoomAutoRecorder
                 txtLink.Clear();
             }
         }
-
         private void lvLessons_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (lvLessons.SelectedItems.Count > 0)
@@ -82,7 +81,7 @@ namespace ZoomAutoRecorder
                 txtTeacher.Text = lvLessons.SelectedItems[0].SubItems[4].Text;
             }
         }
-        private bool checkDup(string lname)
+        private bool CheckDup(string lname)
         {
             bool ret = false;
             bg.Open();
@@ -92,7 +91,6 @@ namespace ZoomAutoRecorder
             bg.Close();
             return ret;
         }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string lesson_name = txtLessonName.Text;
@@ -102,7 +100,7 @@ namespace ZoomAutoRecorder
             if (!string.IsNullOrWhiteSpace(lesson_name) && !string.IsNullOrWhiteSpace(zoomid) && !string.IsNullOrWhiteSpace(zoompass) && !string.IsNullOrWhiteSpace(teacher))
             {
                 
-                if (checkDup(lesson_name))
+                if (CheckDup(lesson_name))
                 {
                     MessageBox.Show("Bu isme sahip bir ders daha var!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -125,7 +123,7 @@ namespace ZoomAutoRecorder
                     bg.Close();
                     Clear();
                     RefreshLessons();
-                    (Application.OpenForms["Main"] as Main).refLessons();
+                    (Application.OpenForms["Main"] as Main).RefLessons();
                 }
             }
             else
@@ -133,7 +131,6 @@ namespace ZoomAutoRecorder
                 MessageBox.Show("Hiçbir alan boş bırakılamaz!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lvLessons.SelectedItems.Count > 0)
@@ -151,11 +148,10 @@ namespace ZoomAutoRecorder
                 bg.Close();
                 Clear();
                 RefreshLessons();
-                (Application.OpenForms["Main"] as Main).refLessons();
-                (Application.OpenForms["Main"] as Main).refProgram();
+                (Application.OpenForms["Main"] as Main).RefLessons();
+                (Application.OpenForms["Main"] as Main).RefProgram();
             }
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             string lesson_name = txtLessonName.Text;
@@ -176,11 +172,10 @@ namespace ZoomAutoRecorder
                 }
                 bg.Close();
                 RefreshLessons();
-                (Application.OpenForms["Main"] as Main).refLessons();
-                (Application.OpenForms["Main"] as Main).refProgram();
+                (Application.OpenForms["Main"] as Main).RefLessons();
+                (Application.OpenForms["Main"] as Main).RefProgram();
             }
         }
-
         private void lvLessons_KeyDown(object sender, KeyEventArgs e)
         {
             btnDelete_Click(null, null);

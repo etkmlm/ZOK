@@ -32,7 +32,6 @@ namespace ZoomAutoRecorder
                 txtPass.Clear();
             }
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtTC.Text) && !string.IsNullOrWhiteSpace(txtPass.Text))
@@ -53,7 +52,6 @@ namespace ZoomAutoRecorder
                 this.Close();
             }
         }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.TCKNPASS = null;

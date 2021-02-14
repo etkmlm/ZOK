@@ -43,7 +43,6 @@ namespace ZoomAutoRecorder
             browser.RequestHandler = new CefHandler(this);
             this.Controls.Add(browser);
         }
-
         private void Browser_KeyDown(object sender, KeyEventArgs e)
         {
             if (isMax && e.KeyData == Keys.F5)
@@ -51,7 +50,6 @@ namespace ZoomAutoRecorder
                 browser.Reload(true);
             }
         }
-
         private void FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
             browser.ExecuteScriptAsync("document.getElementById('tckn').value='" + TCKN + "'");

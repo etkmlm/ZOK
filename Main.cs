@@ -21,6 +21,11 @@ namespace ZoomAutoRecorder
         }
 
         OleDbConnection bg = new OleDbConnection(MainClass.conn);
+        bool isStarted, isEBA, isCancel = false;
+        int delay = 50000;
+        int ix = -1;
+        string day = "";
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             notifyIcon1.Visible = false;
@@ -30,15 +35,15 @@ namespace ZoomAutoRecorder
         }
         List<int> Lesson_IDs = new List<int>();
         List<string> Days = new List<string>() {
+            "Paz",
             "Pzt",
             "Sali",
             "Cars",
             "Pers",
             "Cuma",
-            "Cumt",
-            "Paz" 
+            "Cumt"
         };
-        public void refLessons()
+        public void RefLessons()
         {
             Lesson_IDs.Clear();
             lbDersler.Items.Clear();
@@ -52,8 +57,7 @@ namespace ZoomAutoRecorder
             }
             bg.Close();
         }
-
-        public void refProgram()
+        public void RefProgram()
         {
             string[] spl = Properties.Settings.Default.LessonTime.Split('|');
             ListBox nully = new ListBox();
@@ -111,14 +115,13 @@ namespace ZoomAutoRecorder
             bg.Close();
 
         }
-
         public Task<bool> StartLesson(bool withOBS, bool ebaMode, int id)
         {
             return Task.Run(() =>
             {
                 try
                 {
-                    stopLesson(true);
+                    StopLesson(true);
                     Thread.Sleep(Convert.ToInt32(Properties.Settings.Default.DZA * 1000)); //Ders Zaman Aşımı 
                     if (ebaMode)
                     {
@@ -128,8 +131,8 @@ namespace ZoomAutoRecorder
                     }
                     else
                     {
-                        string lesson_id = getInfo("Select Lesson_Zoom_ID From Lessons where [ID]=" + id + "").ToString();
-                        string pass = getInfo("Select Lesson_Zoom_Pass From Lessons where [ID]=" + id + "").ToString();
+                        string lesson_id = GetInfo("Select Lesson_Zoom_ID From Lessons where [ID]=" + id + "").ToString();
+                        string pass = GetInfo("Select Lesson_Zoom_Pass From Lessons where [ID]=" + id + "").ToString();
                         string link = "https://us04web.zoom.us/j/" + lesson_id + "?pwd=" + pass;
                         Process.Start(string.Format("zoommtg://zoom.us/join?confno={0}&pwd={1}&zc=0", lesson_id, pass));
                     }
@@ -154,8 +157,7 @@ namespace ZoomAutoRecorder
                 }
             });
         }
-
-        public void stopLesson(bool withOBS)
+        public void StopLesson(bool withOBS)
         {
             try
             {
@@ -170,13 +172,12 @@ namespace ZoomAutoRecorder
                     obs32.ForEach(x => x.Kill());
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Hata İçeriği:\n" + ex.Message, "KRİTİK HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private object getInfo(string q)
+        private object GetInfo(string q)
         {
             object ret = "";
             bg.Open();
@@ -186,19 +187,12 @@ namespace ZoomAutoRecorder
             bg.Close();
             return ret;
         }
-
-        bool isStarted = false;
-        int delay = 50000;
-        int ix = -1;
-        bool isEBA = false;
-        bool isCancel = false;
-        private void bwDoWork(object sender, DoWorkEventArgs e)
+        private void BwDoWork(object sender, DoWorkEventArgs e)
         {
             while (!isCancel)
             {
                 int day = (int)DateTime.Now.DayOfWeek;
-                if (day == 6 || day == 0) continue;
-                ListBox lb = Controls.Find("lb" + Days[day - 1], true)[0] as ListBox;
+                ListBox lb = Controls.Find("lb" + Days[day], true)[0] as ListBox;
 
                 string hour = DateTime.Now.ToString("HH.mm");
                 List<string> times = Properties.Settings.Default.LessonTime.Split('|').ToList();
@@ -208,13 +202,13 @@ namespace ZoomAutoRecorder
                     if (ix >= 0 && lb.Items[ix].ToString() != "Boş")
                     {
                         int id = Lesson_IDs[lbDersler.Items.IndexOf(lb.Items[ix])];
-                        string teacher = getInfo($"Select Lesson_Teacher From Lessons where [ID]={id}").ToString();
+                        string teacher = GetInfo($"Select Lesson_Teacher From Lessons where [ID]={id}").ToString();
 
                         notifyIcon1.BalloonTipTitle = string.Format($"{lb.Items[ix]} Dersi Başladı!");
                         notifyIcon1.BalloonTipText = $"Otomatik ders başlatma özelliği açık olduğundan ders otomatik başlatılıyor.\nÖğretmen: {teacher}";
                         notifyIcon1.ShowBalloonTip(2000);
 
-                        var data = getInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={day - 1} AND [Order]={ix}");
+                        var data = GetInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={day} AND [Order]={ix}");
                         if (data == null) return;
                         isEBA = Convert.ToBoolean(data);
                         Task tsk = StartLesson(true, isEBA, id);
@@ -230,7 +224,7 @@ namespace ZoomAutoRecorder
                         string finish = DateTime.Parse(times[ix]).AddMinutes(31).ToString("HH.mm");
                         if (DateTime.Now.ToString("HH.mm") == finish)
                         {
-                            stopLesson(true);
+                            StopLesson(true);
                             delay = 50000;
                             isStarted = false;
                             isEBA = false;
@@ -244,7 +238,7 @@ namespace ZoomAutoRecorder
                             System.Threading.Thread.Sleep(6000);
                             if (Process.GetProcessesByName("Zoom").All(x => x.MainWindowTitle == "Zoom" || string.IsNullOrWhiteSpace(x.MainWindowTitle)))
                             {
-                                stopLesson(true);
+                                StopLesson(true);
                                 delay = 50000;
                                 isStarted = false;
                             }
@@ -255,10 +249,11 @@ namespace ZoomAutoRecorder
             }
             e.Cancel = true;
         }
-        public void refBG()
+        public void RefBG()
         {
             if (Properties.Settings.Default.AutoStart)
             {
+                
                 btnAutoZoom.Text = "Otomatik Dersi Durdur";
                 isCancel = false;
                 if (!backgroundWorker1.IsBusy) backgroundWorker1.RunWorkerAsync();
@@ -272,26 +267,21 @@ namespace ZoomAutoRecorder
         }
         private void Main_Load(object sender, EventArgs e)
         {
-            refLessons();
-            refProgram();
-            refBG();
+            RefLessons();
+            RefProgram();
+            RefBG();
             ToolTip tip = new ToolTip();
             tip.SetToolTip(btnReset, "Yenile");
             tip.SetToolTip(button3, "Ders Programı Ayarları");
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
-
-
             MainClass.OpenForm(new Settings());
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             MainClass.OpenForm(new Lessons());
         }
-
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             ListBox lb = sender as ListBox;
@@ -325,7 +315,7 @@ namespace ZoomAutoRecorder
                 StringBuilder builder = new StringBuilder();
                 if (lb.SelectedItem.ToString() != "Boş")
                 {
-                    string teacher = getInfo($"Select Lesson_Teacher From Lessons where [ID]={Lesson_IDs[index]}").ToString();
+                    string teacher = GetInfo($"Select Lesson_Teacher From Lessons where [ID]={Lesson_IDs[index]}").ToString();
                     builder.AppendLine("Ders Adı: " + lb.SelectedItem.ToString());
                     builder.AppendLine("Öğretmen: " + teacher);
                 }
@@ -340,7 +330,7 @@ namespace ZoomAutoRecorder
             if (lb.SelectedItems.Count > 0 && lb.SelectedItem.ToString() != "Boş")
             {
                 int index = lbDersler.Items.IndexOf(lb.SelectedItem.ToString());
-                var data = getInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={Lesson_IDs[index]} AND [Day]={Days.IndexOf(lb.Name.Replace("lb", ""))} AND [Order]={lb.SelectedIndex}");
+                var data = GetInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={Lesson_IDs[index]} AND [Day]={Days.IndexOf(lb.Name.Replace("lb", ""))} AND [Order]={lb.SelectedIndex}");
                 if (data == null || string.IsNullOrWhiteSpace(data.ToString())) data = false;
                 bool check = Convert.ToBoolean(data);
                 if (check)
@@ -363,7 +353,6 @@ namespace ZoomAutoRecorder
                 lb.SelectedIndex = -1;
             }
         }
-
         private void lbDersler_MouseDown(object sender, MouseEventArgs e)
         {
             if (lbDersler.SelectedItems.Count > 0 && ModifierKeys == Keys.None)
@@ -373,7 +362,6 @@ namespace ZoomAutoRecorder
             }
 
         }
-
         private void OnDragDrop(object sender, DragEventArgs e)
         {
             ListBox lb = sender as ListBox;
@@ -411,12 +399,10 @@ namespace ZoomAutoRecorder
                 bg.Close();
             }
         }
-
         private void OnDragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
-
         private void lbDersler_MouseClick(object sender, MouseEventArgs e)
         {
             if (Control.ModifierKeys == Keys.Shift && lbDersler.SelectedItems.Count > 0)
@@ -426,24 +412,20 @@ namespace ZoomAutoRecorder
                 lbDersler.SelectedIndex = -1;
             }
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             MainClass.OpenForm(new SetProgram());
         }
-
         private void btnAppClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             notifyIcon1.BalloonTipTitle = "Uyarı";
             notifyIcon1.BalloonTipText = "Otomatik ders özelliği kapatıldı!";
             notifyIcon1.ShowBalloonTip(2000);
         }
-
         private void btnAppHS_Click(object sender, EventArgs e)
         {
             if (btnAppHS.Text == "Programı Gizle")
@@ -458,7 +440,6 @@ namespace ZoomAutoRecorder
                 btnAppHS.Text = "Programı Gizle";
             }
         }
-
         private void Main_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -468,7 +449,6 @@ namespace ZoomAutoRecorder
             }
 
         }
-
         private void btnAbout_Click(object sender, EventArgs e)
         {
             StringBuilder builder = new StringBuilder();
@@ -480,7 +460,6 @@ namespace ZoomAutoRecorder
 
             MessageBox.Show(builder.ToString(), "Z.O.K. Hakkında", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void btnAutoZoom_Click(object sender, EventArgs e)
         {
             if (btnAutoZoom.Text == "Otomatik Dersi Başlat")
@@ -495,18 +474,16 @@ namespace ZoomAutoRecorder
                 isCancel = true;
             }
         }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             if (backgroundWorker1.IsBusy) backgroundWorker1.CancelAsync();
             isEBA = false;
             isStarted = false;
-            refLessons();
-            refProgram();
-            refBG();
+            RefLessons();
+            RefProgram();
+            RefBG();
             btnAppHS.Text = "Programı Gizle";
         }
-        string day = "";
         private void OnClickLB(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -521,7 +498,7 @@ namespace ZoomAutoRecorder
                         lb.ContextMenuStrip.Items[0].Visible = true;
                         lb.ContextMenuStrip.Items[1].Visible = true;
                         int id = Lesson_IDs[lbDersler.Items.IndexOf(lb.SelectedItem.ToString())];
-                        bool check = Convert.ToBoolean(getInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={Days.IndexOf(day)} AND [Order]={index}"));
+                        bool check = Convert.ToBoolean(GetInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={Days.IndexOf(day)} AND [Order]={index}"));
                         if (check) lb.ContextMenuStrip.Items[0].Text = "EBA Kapat";
                         else lb.ContextMenuStrip.Items[0].Text = "EBA Aç";
                     }
@@ -540,7 +517,6 @@ namespace ZoomAutoRecorder
 
             }
         }
-
         private void btnEBA_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(day)) return;
@@ -570,7 +546,6 @@ namespace ZoomAutoRecorder
             bg.Close();
             lb.SelectedIndex = -1;
         }
-
         private void btnBrowser_Click(object sender, EventArgs e)
         {
             string[] tcknpass = Properties.Settings.Default.TCKNPASS.Split('#');
@@ -584,7 +559,6 @@ namespace ZoomAutoRecorder
                 MessageBox.Show("EBA giriş bilgileri ayarlanmadı!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnProgDel_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(day)) return;

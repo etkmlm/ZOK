@@ -17,6 +17,7 @@ namespace ZoomAutoRecorder
             InitializeComponent();
         }
         List<string> periods = new List<string>();
+
         private void nudLessonNumber_ValueChanged(object sender, EventArgs e)
         {
             int value = Convert.ToInt32(nudLessonNumber.Value);
@@ -32,7 +33,6 @@ namespace ZoomAutoRecorder
             lbPeriods.Items.Clear();
             periods.Select((x, y) => y).ToList().ForEach(x => lbPeriods.Items.Add(x + 1 + ". Ders"));
         }
-
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if (lbPeriods.SelectedItems.Count > 0)
@@ -41,7 +41,6 @@ namespace ZoomAutoRecorder
                 periods[index] = dateTimePicker1.Value.ToString();
             }
         }
-
         private void lbPeriods_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbPeriods.SelectedItems.Count > 0)
@@ -58,7 +57,6 @@ namespace ZoomAutoRecorder
                 }
             }
         }
-        
         private void RefreshProgram()
         {
             string[] spl = Properties.Settings.Default.LessonTime.Split('|');
@@ -74,12 +72,10 @@ namespace ZoomAutoRecorder
                 lbPeriods.Items.Clear();
             }
         }
-
         private void SetProgram_Load(object sender, EventArgs e)
         {
             RefreshProgram();
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (nudLessonNumber.Value != 0)
@@ -92,7 +88,7 @@ namespace ZoomAutoRecorder
                 }
                 Properties.Settings.Default.LessonTime = prop;
                 Properties.Settings.Default.Save();
-                (Application.OpenForms["Main"] as Main).refProgram();
+                (Application.OpenForms["Main"] as Main).RefProgram();
                 MessageBox.Show("Ders programı ayarları güncellendi!", "BAŞARILI", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }

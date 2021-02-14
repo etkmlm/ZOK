@@ -17,6 +17,7 @@ namespace ZoomAutoRecorder
         {
             InitializeComponent();
         }
+
         private void Save()
         {
             string zoom = txtZoomPath.Text;
@@ -35,7 +36,7 @@ namespace ZoomAutoRecorder
                 Properties.Settings.Default.DZA = Convert.ToDouble(nudDers.Value);
                 Properties.Settings.Default.KZA = Convert.ToDouble(nudKayit.Value);
                 Properties.Settings.Default.Save();
-                ((Main)Application.OpenForms["Main"]).refBG();
+                ((Main)Application.OpenForms["Main"]).RefBG();
             }
         }
         private void btnZoom_Click(object sender, EventArgs e)
@@ -44,14 +45,12 @@ namespace ZoomAutoRecorder
             openFileDialog1.ShowDialog();
             txtZoomPath.Text = openFileDialog1.FileName;
         }
-
         private void btnOBS_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = txtOBSPath.Text;
             openFileDialog1.ShowDialog();
             txtOBSPath.Text = openFileDialog1.FileName;
         }
-
         private void Settings_Load(object sender, EventArgs e)
         {
             ToolTip tip = new ToolTip();
@@ -68,7 +67,6 @@ namespace ZoomAutoRecorder
             nudKayit.Value = Convert.ToDecimal(Properties.Settings.Default.KZA);
             
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             txtOBSPath.Clear();
@@ -79,20 +77,17 @@ namespace ZoomAutoRecorder
             nudKayit.Value = 3;
             Save();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Save();
             MessageBox.Show("Ayarlarınız kaydedildi!", "Zoom Ders Kaydedici", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
-
         private void chkKaydet_CheckedChanged(object sender, EventArgs e)
         {
             txtOBSPath.Enabled = chkKaydet.Checked;
             btnOBS.Enabled = chkKaydet.Checked;
         }
-
         private void btnSecret_Click(object sender, EventArgs e)
         {
             MainClass.OpenForm(new Secret());
