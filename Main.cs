@@ -172,9 +172,9 @@ namespace ZoomAutoRecorder
                     obs32.ForEach(x => x.Kill());
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Hata İçeriği:\n" + ex.Message, "KRİTİK HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
         }
         private object GetInfo(string q)
