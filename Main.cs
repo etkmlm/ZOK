@@ -134,7 +134,7 @@ namespace ZoomAutoRecorder
                         , MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
-                        var asset = rel.Assets.FirstOrDefault(x => x.Name == rel.TagName + "e.zip");
+                        var asset = rel.Assets.FirstOrDefault(x => x.Name == $"v{rel.TagName}e.zip");
                         if (asset == null) return;
                         Process.Start(asset.BrowserDownloadUrl);
                     }
