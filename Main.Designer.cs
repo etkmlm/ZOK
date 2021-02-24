@@ -40,6 +40,7 @@ namespace ZoomAutoRecorder
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnEBA = new System.Windows.Forms.ToolStripMenuItem();
             this.btnProgDel = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOnce = new System.Windows.Forms.ToolStripMenuItem();
             this.lbCumt = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -176,24 +177,32 @@ namespace ZoomAutoRecorder
             this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnEBA,
-            this.btnProgDel});
+            this.btnProgDel,
+            this.btnOnce});
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenu.Size = new System.Drawing.Size(106, 52);
+            this.contextMenu.Size = new System.Drawing.Size(210, 76);
             // 
             // btnEBA
             // 
             this.btnEBA.Name = "btnEBA";
-            this.btnEBA.Size = new System.Drawing.Size(105, 24);
+            this.btnEBA.Size = new System.Drawing.Size(209, 24);
             this.btnEBA.Text = "EBA";
             this.btnEBA.Click += new System.EventHandler(this.btnEBA_Click);
             // 
             // btnProgDel
             // 
             this.btnProgDel.Name = "btnProgDel";
-            this.btnProgDel.Size = new System.Drawing.Size(105, 24);
+            this.btnProgDel.Size = new System.Drawing.Size(209, 24);
             this.btnProgDel.Text = "Sil";
             this.btnProgDel.Click += new System.EventHandler(this.btnProgDel_Click);
+            // 
+            // btnOnce
+            // 
+            this.btnOnce.Name = "btnOnce";
+            this.btnOnce.Size = new System.Drawing.Size(209, 24);
+            this.btnOnce.Text = "Bir Kereliğine Açma";
+            this.btnOnce.Click += new System.EventHandler(this.btnOnce_Click);
             // 
             // lbCumt
             // 
@@ -479,6 +488,7 @@ namespace ZoomAutoRecorder
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Oto Zoom";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // btnAbout
             // 
@@ -579,6 +589,7 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripMenuItem btnProgDel;
+        private System.Windows.Forms.ToolStripMenuItem btnOnce;
     }
 }
 

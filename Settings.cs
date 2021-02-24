@@ -63,6 +63,7 @@ namespace ZoomAutoRecorder
             chkKaydet.Checked = Properties.Settings.Default.RecordLesson;
             txtOBSPath.Enabled = chkKaydet.Checked;
             btnOBS.Enabled = chkKaydet.Checked;
+            nudKayit.Enabled = chkKaydet.Checked;
             nudDers.Value = Convert.ToDecimal(Properties.Settings.Default.DZA);
             nudKayit.Value = Convert.ToDecimal(Properties.Settings.Default.KZA);
             
@@ -87,6 +88,7 @@ namespace ZoomAutoRecorder
         {
             txtOBSPath.Enabled = chkKaydet.Checked;
             btnOBS.Enabled = chkKaydet.Checked;
+            nudKayit.Enabled = chkKaydet.Checked;
         }
         private void btnSecret_Click(object sender, EventArgs e)
         {

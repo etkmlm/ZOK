@@ -199,7 +199,7 @@ namespace ZoomAutoRecorder
                 if (!isStarted && times.Any(x => !string.IsNullOrEmpty(x) && DateTime.Parse(x).ToString("HH.mm") == hour))
                 {
                     ix = times.IndexOf(times.FirstOrDefault(x => DateTime.Parse(x).ToString("HH.mm") == hour));
-                    if (ix >= 0 && lb.Items[ix].ToString() != "Boş")
+                    if (ix >= 0 && lb.Items[ix].ToString() != "Boş" && !MainClass.OnceDontOpen.Any(x => x == ix.ToString()))
                     {
                         int id = Lesson_IDs[lbDersler.Items.IndexOf(lb.Items[ix])];
                         string teacher = GetInfo($"Select Lesson_Teacher From Lessons where [ID]={id}").ToString();
@@ -335,7 +335,7 @@ namespace ZoomAutoRecorder
                 bool check = Convert.ToBoolean(data);
                 if (check)
                 {
-                    List<string> times = Properties.Settings.Default.LessonTime.Split('|').ToList();
+                    string[] times = Properties.Settings.Default.LessonTime.Split('|');
                     bool y = false;
                     foreach (string time in times)
                     {
@@ -483,6 +483,20 @@ namespace ZoomAutoRecorder
             RefProgram();
             RefBG();
             btnAppHS.Text = "Programı Gizle";
+            if (Control.ModifierKeys == Keys.Shift && !string.IsNullOrEmpty(Properties.Settings.Default.LessonTime))
+            {
+                string[] times = Properties.Settings.Default.LessonTime.Split('|');
+                bool y = false;
+                foreach (string time in times)
+                {
+                    DateTime dtime = new DateTime(1, 1, 1, DateTime.Parse(time).Hour, DateTime.Parse(time).Minute, 0);
+                    DateTime now = new DateTime(1, 1, 1, DateTime.Now.Hour, DateTime.Now.Minute, 0);
+                    if (now >= dtime && now < dtime.AddMinutes(30)) y = true;
+                }
+                if (!y || !backgroundWorker1.IsBusy) return;
+                isStarted = true;
+            }
+            
         }
         private void OnClickLB(object sender, MouseEventArgs e)
         {
@@ -501,11 +515,14 @@ namespace ZoomAutoRecorder
                         bool check = Convert.ToBoolean(GetInfo($"Select EBAMode From LessonProgram where [Lesson_ID]={id} AND [Day]={Days.IndexOf(day)} AND [Order]={index}"));
                         if (check) lb.ContextMenuStrip.Items[0].Text = "EBA Kapat";
                         else lb.ContextMenuStrip.Items[0].Text = "EBA Aç";
+                        if ((int)DateTime.Now.DayOfWeek == Days.IndexOf(day)) lb.ContextMenuStrip.Items[2].Visible = true;
+                        else lb.ContextMenuStrip.Items[2].Visible = false;
                     }
                     else
                     {
                         lb.ContextMenuStrip.Items[0].Visible = false;
                         lb.ContextMenuStrip.Items[1].Visible = false;
+                        lb.ContextMenuStrip.Items[2].Visible = false;
                         lb.SelectedIndex = -1;
                     }
                 }
@@ -513,6 +530,7 @@ namespace ZoomAutoRecorder
                 {
                     lb.ContextMenuStrip.Items[0].Visible = false;
                     lb.ContextMenuStrip.Items[1].Visible = false;
+                    lb.ContextMenuStrip.Items[2].Visible = false;
                 }
 
             }
@@ -545,6 +563,40 @@ namespace ZoomAutoRecorder
 
             bg.Close();
             lb.SelectedIndex = -1;
+        }
+        private void btnOnce_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(day)) return;
+            ListBox lb = Controls.Find("lb" + day, true)[0] as ListBox;
+            string ix = lb.SelectedIndex.ToString();
+            string item = MainClass.OnceDontOpen.FirstOrDefault(x => x == ix);
+            var sndr = sender as ToolStripMenuItem;
+            if (!string.IsNullOrEmpty(item))
+            {
+                MainClass.OnceDontOpen.Remove(item.ToString());
+                sndr.Text = "Bir Kereliğine Açma";
+            }
+            else
+            {
+                MainClass.OnceDontOpen.Add(ix);
+                sndr.Text = "Her Zaman Aç";
+            }
+            lb.SelectedIndex = -1;
+        }
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Visible = true;
+                this.WindowState = FormWindowState.Normal;
+                btnAppHS.Text = "Programı Gizle";
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Minimized;
+                btnAppHS.Text = "Programı Göster";
+            }
         }
         private void btnBrowser_Click(object sender, EventArgs e)
         {

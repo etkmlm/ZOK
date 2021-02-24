@@ -15,6 +15,7 @@ namespace ZoomAutoRecorder
         public const string version = "0.7 BETA";
         
         public static string EBALink;
+        public static List<string> OnceDontOpen = new List<string>();
 
         public static void OpenForm(Form frm)
         {
