@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Octokit;
+using Application = System.Windows.Forms.Application;
 
 namespace ZoomAutoRecorder
 {
@@ -21,6 +23,7 @@ namespace ZoomAutoRecorder
         }
 
         OleDbConnection bg = new OleDbConnection(MainClass.conn);
+        GitHubClient client = new GitHubClient(new ProductHeaderValue("zok"));
         bool isStarted, isEBA, isCancel = false;
         int delay = 50000;
         int ix = -1;
@@ -114,6 +117,39 @@ namespace ZoomAutoRecorder
             }
             bg.Close();
 
+        }
+        public void CheckUpdate()
+        {
+            try
+            {
+                var rel = client.Repository.Release.GetAll("etkmlm", "zok").Result[0];
+                double newerver = double.Parse(rel.TagName.Replace('.', ','));
+                double nowver = double.Parse(MainClass.version.Replace('.', ','));
+                if (nowver < newerver)
+                {
+                    DialogResult result = MessageBox.Show(
+                        $"Yeni bir güncelleme mevcut!\nKullandığınız Sürüm: {MainClass.version}\nYeni Sürüm: {rel.TagName}"
+                        , "GÜNCELLEME"
+                        , MessageBoxButtons.YesNo
+                        , MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
+                    {
+                        var asset = rel.Assets.FirstOrDefault(x => x.Name == rel.TagName + "e.zip");
+                        if (asset == null) return;
+                        Process.Start(asset.BrowserDownloadUrl);
+                    }
+                }
+                else if (nowver > newerver)
+                    MessageBox.Show(
+                        $"Şu anda süper yeni bir sürüm kullanıyorsunuz!\nKullandığınız Sürüm: {MainClass.version}\nYayınlanan En Yeni Sürüm: {rel.TagName}"
+                        , "GÜNCELLEME"
+                        , MessageBoxButtons.OK
+                        , MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Güncellemeler kontrol edilirken bir sorun oluştu, lütfen daha sonra tekrar deneyin.", "GÜNCELLEME KONTROLÜ BAŞARISIZ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public Task<bool> StartLesson(bool withOBS, bool ebaMode, int id)
         {
@@ -273,6 +309,7 @@ namespace ZoomAutoRecorder
             ToolTip tip = new ToolTip();
             tip.SetToolTip(btnReset, "Yenile");
             tip.SetToolTip(button3, "Ders Programı Ayarları");
+            CheckUpdate();
         }
         private void button2_Click(object sender, EventArgs e)
         {
