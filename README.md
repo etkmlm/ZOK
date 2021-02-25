@@ -19,7 +19,7 @@ Bu program, Zoom ve EBA derslerini/toplantılarını otomatik açmakta ve isteğ
 
 # Hata Mesajları Hakkında
 - Program veri tabanına erişemedi...:
-  - Bu hata genellikle Database.mdb dosyasının salt okunur olmasından kaynaklanır. Programı farklı bir konuma kurmayı deneyin. Örnek: C:\Users\<kullanıcı>\AppData\Local
+  - Bu hata genellikle Database.mdb dosyasının salt okunur olmasından kaynaklanır. Programı farklı bir konuma kurmayı deneyin. Örnek: C:\Users\\<kullanıcı>\AppData\Local
   - İsteğe bağlı olarak veri tabanı salt okunurluktan çıkarılır.
 - Güncellemeler kontrol edilirken bir sorun oluştu...:
   - Bu hata genellikle internet bağlantısı olmadığından kaynaklanır.
