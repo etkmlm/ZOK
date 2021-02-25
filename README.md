@@ -17,6 +17,14 @@ Bu program, Zoom ve EBA derslerini/toplantılarını otomatik açmakta ve isteğ
 11. Toplantıları programa eklemek için ilgili günün içinden sıra seçilir ve sol taraftaki toplantı ismi sürüklenip seçilen sıraya bırakılır.
 12. Program üzerindeki menüde EBA modunu açmak için ilgili toplantının üzerine sağ tıklanıp "EBA Aç" veya "EBA Kapat" seçeneklerinden biri seçilebilir.
 
+# Hata Mesajları Hakkında
+- Program veri tabanına erişemedi...:
+  - Bu hata genellikle Database.mdb dosyasının salt okunur olmasından kaynaklanır. Programı farklı bir konuma kurmayı deneyin. Örnek: C:\Users\<kullanıcı>\AppData\Local
+  - İsteğe bağlı olarak veri tabanı salt okunurluktan çıkarılır.
+- Güncellemeler kontrol edilirken bir sorun oluştu...:
+  - Bu hata genellikle internet bağlantısı olmadığından kaynaklanır.
+  - Bazen GitHub kaynaklı olabilir.
+
 # Yasal Uyarı
 İzinsiz ses ve görüntü almak yasak olduğundan programı kullanan kişi tüm sorumluluğu üstlenmektedir. Eğer kayıt yapılacaksa program kullanılmadan önce ilgili kişilerden izinler alınmalıdır.
 
