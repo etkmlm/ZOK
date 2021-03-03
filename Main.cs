@@ -34,6 +34,7 @@ namespace ZoomAutoRecorder
             notifyIcon1.Visible = false;
             notifyIcon1.Icon = null;
             notifyIcon1.Dispose();
+            if (CefSharp.Cef.IsInitialized) CefSharp.Cef.Shutdown();
             Application.Exit();
         }
         List<int> Lesson_IDs = new List<int>();
@@ -386,6 +387,11 @@ namespace ZoomAutoRecorder
                 if (backgroundWorker1.IsBusy)
                 {
                     isStarted = true;
+                    if (check)
+                    {
+                        isEBA = check;
+                        ix = lb.SelectedIndex;
+                    }
                 }
                 lb.SelectedIndex = -1;
             }

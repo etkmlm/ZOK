@@ -28,7 +28,6 @@ namespace ZoomAutoRecorder
             Pass = pass;
             InitializeCEF();
         }
-
         public void InitializeCEF()
         {
             if (!Cef.IsInitialized)
