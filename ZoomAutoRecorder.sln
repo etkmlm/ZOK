@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomAutoRecorder", "ZoomAut
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ZoomAutoRecorderSetup", "..\ZoomAutoRecorderSetup\ZoomAutoRecorderSetup.vdproj", "{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZOKUpdater", "..\ZOKUpdater\ZOKUpdater.csproj", "{FC0875B3-D032-40C5-8B83-9B716E361C34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,18 @@ Global
 		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|Any CPU.ActiveCfg = Release
 		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|x64.ActiveCfg = Release
 		{B5FCD92E-1DDF-40FE-9CB9-A1C6AECCB187}.Release|x86.ActiveCfg = Release
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|x64.Build.0 = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|x64.Build.0 = Release|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC0875B3-D032-40C5-8B83-9B716E361C34}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

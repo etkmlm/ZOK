@@ -42,7 +42,7 @@ namespace ZoomAutoRecorder
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Lütfen TC'nizi düzgün formatta girin.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Main.ShowError("Lütfen TC'nizi düzgün formatta girin.");
                     return;
                 }
                 string tckn = Encryption.Encrypt(txtTC.Text);

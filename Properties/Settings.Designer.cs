@@ -118,5 +118,29 @@ namespace ZoomAutoRecorder.Properties {
                 this["TCKNPASS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50000")]
+        public int WorkerDelay {
+            get {
+                return ((int)(this["WorkerDelay"]));
+            }
+            set {
+                this["WorkerDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoMode {
+            get {
+                return ((bool)(this["AutoMode"]));
+            }
+            set {
+                this["AutoMode"] = value;
+            }
+        }
     }
 }

@@ -48,11 +48,9 @@ namespace ZoomAutoRecorder
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.btnSolve = new System.Windows.Forms.Button();
             this.txtLink = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvLessons
@@ -175,94 +173,88 @@ namespace ZoomAutoRecorder
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAdd.Location = new System.Drawing.Point(637, 419);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnAdd.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnAdd.Location = new System.Drawing.Point(474, 475);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(171, 47);
             this.btnAdd.TabIndex = 9;
-            this.btnAdd.Text = "EKLE";
+            this.btnAdd.Text = "Ekle";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnDelete.Location = new System.Drawing.Point(460, 472);
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnDelete.ForeColor = System.Drawing.Color.MediumAquamarine;
+            this.btnDelete.Location = new System.Drawing.Point(630, 422);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(171, 54);
+            this.btnDelete.Size = new System.Drawing.Size(171, 47);
             this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "SİL";
+            this.btnDelete.Text = "Sil";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnRefresh.Location = new System.Drawing.Point(637, 472);
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.Teal;
+            this.btnRefresh.Location = new System.Drawing.Point(630, 528);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(171, 54);
+            this.btnRefresh.Size = new System.Drawing.Size(171, 47);
             this.btnRefresh.TabIndex = 11;
-            this.btnRefresh.Text = "YENİLE";
+            this.btnRefresh.Text = "Yenile";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSave.Location = new System.Drawing.Point(460, 419);
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSave.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.btnSave.Location = new System.Drawing.Point(474, 372);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(171, 47);
             this.btnSave.TabIndex = 12;
-            this.btnSave.Text = "KAYDET";
+            this.btnSave.Text = "Kaydet";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Wheat;
-            this.panel1.Controls.Add(this.btnSolve);
-            this.panel1.Controls.Add(this.txtLink);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(404, 364);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(454, 49);
-            this.panel1.TabIndex = 13;
             // 
             // btnSolve
             // 
             this.btnSolve.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSolve.Location = new System.Drawing.Point(354, 8);
+            this.btnSolve.Location = new System.Drawing.Point(404, 536);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(90, 34);
-            this.btnSolve.TabIndex = 14;
-            this.btnSolve.Text = "ÇÖZ";
+            this.btnSolve.Size = new System.Drawing.Size(38, 34);
+            this.btnSolve.TabIndex = 16;
+            this.btnSolve.Text = "Ç";
             this.btnSolve.UseVisualStyleBackColor = true;
-            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // txtLink
             // 
             this.txtLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtLink.Location = new System.Drawing.Point(68, 8);
+            this.txtLink.Location = new System.Drawing.Point(147, 536);
             this.txtLink.Name = "txtLink";
-            this.txtLink.Size = new System.Drawing.Size(280, 34);
-            this.txtLink.TabIndex = 15;
+            this.txtLink.Size = new System.Drawing.Size(251, 34);
+            this.txtLink.TabIndex = 18;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(-1, 8);
+            this.label5.Location = new System.Drawing.Point(78, 536);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 29);
-            this.label5.TabIndex = 14;
+            this.label5.TabIndex = 17;
             this.label5.Text = "Link:";
             // 
             // Lessons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 531);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(870, 585);
+            this.Controls.Add(this.btnSolve);
+            this.Controls.Add(this.txtLink);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
@@ -282,8 +274,6 @@ namespace ZoomAutoRecorder
             this.Name = "Lessons";
             this.Text = "Dersleri Yönet";
             this.Load += new System.EventHandler(this.Lessons_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,7 +299,6 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSolve;
         private System.Windows.Forms.TextBox txtLink;
         private System.Windows.Forms.Label label5;

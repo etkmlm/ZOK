@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ZoomAutoRecorder
+namespace ZoomAutoRecorder.Utils
 {
     class MainClass
     {
@@ -15,14 +15,12 @@ namespace ZoomAutoRecorder
         public const string version = "0.81";
         
         public static string EBALink;
-        public static List<string> OnceDontOpen = new List<string>();
+        public static List<int> OnceDontOpen = new List<int>();
 
         public static void OpenForm(Form frm)
         {
             if (frm != null && Application.OpenForms[frm.Name] == null)
-            {
                 frm.Show();
-            }
         }
     }
 }

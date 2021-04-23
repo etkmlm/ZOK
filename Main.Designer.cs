@@ -33,14 +33,16 @@ namespace ZoomAutoRecorder
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.lbDersler = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnLessons = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbPaz = new System.Windows.Forms.ListBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnEBA = new System.Windows.Forms.ToolStripMenuItem();
             this.btnProgDel = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOnce = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnLessonInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnStartProgramLesson = new System.Windows.Forms.ToolStripMenuItem();
             this.lbCumt = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -54,17 +56,18 @@ namespace ZoomAutoRecorder
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnProgramSettings = new System.Windows.Forms.Button();
             this.contextIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnAppHS = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAutoZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAppClose = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnBrowser = new System.Windows.Forms.Button();
+            this.barDownload = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.contextIcon.SuspendLayout();
@@ -95,27 +98,28 @@ namespace ZoomAutoRecorder
             this.label1.TabIndex = 1;
             this.label1.Text = "Dersler";
             // 
-            // button1
+            // btnLessons
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(12, 527);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(218, 39);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "DÜZENLE";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLessons.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnLessons.Location = new System.Drawing.Point(12, 527);
+            this.btnLessons.Name = "btnLessons";
+            this.btnLessons.Size = new System.Drawing.Size(218, 39);
+            this.btnLessons.TabIndex = 2;
+            this.btnLessons.Text = "Düzenle";
+            this.btnLessons.UseVisualStyleBackColor = true;
+            this.btnLessons.Click += new System.EventHandler(this.btnLessons_Click);
             // 
-            // button2
+            // btnSettings
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(1087, 527);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(218, 39);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "AYARLAR";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSettings.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSettings.Location = new System.Drawing.Point(1126, 527);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(179, 39);
+            this.btnSettings.TabIndex = 3;
+            this.btnSettings.Text = "Ayarlar";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -178,10 +182,12 @@ namespace ZoomAutoRecorder
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnEBA,
             this.btnProgDel,
-            this.btnOnce});
+            this.btnOnce,
+            this.btnLessonInfo,
+            this.btnStartProgramLesson});
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenu.Size = new System.Drawing.Size(210, 76);
+            this.contextMenu.Size = new System.Drawing.Size(210, 124);
             // 
             // btnEBA
             // 
@@ -203,6 +209,20 @@ namespace ZoomAutoRecorder
             this.btnOnce.Size = new System.Drawing.Size(209, 24);
             this.btnOnce.Text = "Bir Kereliğine Açma";
             this.btnOnce.Click += new System.EventHandler(this.btnOnce_Click);
+            // 
+            // btnLessonInfo
+            // 
+            this.btnLessonInfo.Name = "btnLessonInfo";
+            this.btnLessonInfo.Size = new System.Drawing.Size(209, 24);
+            this.btnLessonInfo.Text = "Bilgi";
+            this.btnLessonInfo.Click += new System.EventHandler(this.btnLessonInfo_Click);
+            // 
+            // btnStartProgramLesson
+            // 
+            this.btnStartProgramLesson.Name = "btnStartProgramLesson";
+            this.btnStartProgramLesson.Size = new System.Drawing.Size(209, 24);
+            this.btnStartProgramLesson.Text = "Başlat";
+            this.btnStartProgramLesson.Click += new System.EventHandler(this.btnStartProgramLesson_Click);
             // 
             // lbCumt
             // 
@@ -421,16 +441,16 @@ namespace ZoomAutoRecorder
             this.label2.Text = "Pazartesi";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button3
+            // btnProgramSettings
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button3.Location = new System.Drawing.Point(1222, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(83, 39);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "P.A.";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnProgramSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnProgramSettings.Location = new System.Drawing.Point(1222, 4);
+            this.btnProgramSettings.Name = "btnProgramSettings";
+            this.btnProgramSettings.Size = new System.Drawing.Size(83, 39);
+            this.btnProgramSettings.TabIndex = 5;
+            this.btnProgramSettings.Text = "P.A.";
+            this.btnProgramSettings.UseVisualStyleBackColor = true;
+            this.btnProgramSettings.Click += new System.EventHandler(this.btnProgramSettings_Click);
             // 
             // contextIcon
             // 
@@ -478,24 +498,22 @@ namespace ZoomAutoRecorder
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwDoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // notifyIcon1
+            // notify
             // 
-            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon1.ContextMenuStrip = this.contextIcon;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "Oto Zoom";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            this.notify.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notify.ContextMenuStrip = this.contextIcon;
+            this.notify.Icon = ((System.Drawing.Icon)(resources.GetObject("notify.Icon")));
+            this.notify.Text = "Oto Zoom";
+            this.notify.Visible = true;
+            this.notify.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notify_MouseClick);
             // 
             // btnAbout
             // 
-            this.btnAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAbout.Location = new System.Drawing.Point(863, 527);
+            this.btnAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnAbout.Location = new System.Drawing.Point(941, 527);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(218, 39);
+            this.btnAbout.Size = new System.Drawing.Size(179, 39);
             this.btnAbout.TabIndex = 6;
             this.btnAbout.Text = "Hakkında";
             this.btnAbout.UseVisualStyleBackColor = true;
@@ -523,18 +541,27 @@ namespace ZoomAutoRecorder
             this.btnBrowser.UseVisualStyleBackColor = true;
             this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
             // 
+            // barDownload
+            // 
+            this.barDownload.Location = new System.Drawing.Point(903, 4);
+            this.barDownload.Name = "barDownload";
+            this.barDownload.Size = new System.Drawing.Size(158, 39);
+            this.barDownload.TabIndex = 9;
+            this.barDownload.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 574);
+            this.Controls.Add(this.barDownload);
             this.Controls.Add(this.btnBrowser);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnAbout);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnProgramSettings);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.btnLessons);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbDersler);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -558,8 +585,8 @@ namespace ZoomAutoRecorder
 
         private System.Windows.Forms.ListBox lbDersler;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLessons;
+        private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -570,11 +597,11 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.ListBox lbPers;
         private System.Windows.Forms.ListBox lbCars;
         private System.Windows.Forms.ListBox lbSali;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnProgramSettings;
         private System.Windows.Forms.ListBox lbPzt;
         private System.Windows.Forms.ContextMenuStrip contextIcon;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon notify;
         private System.Windows.Forms.ToolStripMenuItem btnAppHS;
         private System.Windows.Forms.ToolStripMenuItem btnAutoZoom;
         private System.Windows.Forms.ToolStripMenuItem btnAppClose;
@@ -590,6 +617,9 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripMenuItem btnProgDel;
         private System.Windows.Forms.ToolStripMenuItem btnOnce;
+        private System.Windows.Forms.ToolStripMenuItem btnLessonInfo;
+        private System.Windows.Forms.ToolStripMenuItem btnStartProgramLesson;
+        private System.Windows.Forms.ProgressBar barDownload;
     }
 }
 

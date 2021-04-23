@@ -93,7 +93,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization" />
@@ -114,7 +113,9 @@
     <Compile Include="Browser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Encryption.cs" />
+    <Compile Include="Utils\BGWorker.cs" />
+    <Compile Include="Utils\ConfigManagement.cs" />
+    <Compile Include="Utils\Encryption.cs" />
     <Compile Include="Lessons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,7 +128,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainClass.cs" />
+    <Compile Include="Utils\MainClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Secret.cs">
@@ -148,6 +149,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Database.cs" />
+    <Compile Include="Utils\Update.cs" />
+    <Compile Include="Utils\ZoomEntities.cs" />
     <EmbeddedResource Include="Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +208,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

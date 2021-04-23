@@ -16,46 +16,40 @@ namespace ZoomAutoRecorder
         {
             InitializeComponent();
         }
-        List<string> periods = new List<string>();
+        List<string> Periods = new List<string>();
 
         private void nudLessonNumber_ValueChanged(object sender, EventArgs e)
         {
             int value = Convert.ToInt32(nudLessonNumber.Value);
-            if (periods.Count > value)
+            if (Periods.Count > value)
+                for (int i = Periods.Count - 1; i >= value; i--)
+                    Periods.RemoveAt(i);
+            else if (Periods.Count < value)
             {
-                for (int i = periods.Count-1; i >= value; i--) periods.RemoveAt(i);
-            }
-            else if (periods.Count < value)
-            {
-                int f = value - periods.Count;
-                for (int i = 0; i < f; i++) periods.Add("");
+                int f = value - Periods.Count;
+                for (int i = 0; i < f; i++) 
+                    Periods.Add("");
             }
             lbPeriods.Items.Clear();
-            periods.Select((x, y) => y).ToList().ForEach(x => lbPeriods.Items.Add(x + 1 + ". Ders"));
+            for (int i = 0; i < Periods.Count; i++)
+                lbPeriods.Items.Add(i + 1 + ". Ders");
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            if (lbPeriods.SelectedItems.Count > 0)
-            {
-                int index = lbPeriods.SelectedIndex;
-                periods[index] = dateTimePicker1.Value.ToString();
-            }
+            if (lbPeriods.SelectedItems.Count <= 0) return;
+            int index = lbPeriods.SelectedIndex;
+            Periods[index] = dateTimePicker1.Value.ToString();
         }
         private void lbPeriods_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbPeriods.SelectedItems.Count > 0)
-            {
-                int index = lbPeriods.SelectedIndex;
-                string date = periods[index];
-                if (!string.IsNullOrEmpty(date))
-                {
-                    dateTimePicker1.Value = DateTime.Parse(date);
-                }
-                else
-                {
-                    dateTimePicker1.Value = DateTime.Now;
-                }
-            }
+            if (lbPeriods.SelectedItems.Count <= 0) return;
+
+            int index = lbPeriods.SelectedIndex;
+            string date = Periods[index];
+            if (!string.IsNullOrEmpty(date))
+                dateTimePicker1.Value = DateTime.Parse(date);
+            else
+                dateTimePicker1.Value = new DateTime(2021, 12, 13, 0, 0, 0);
         }
         private void RefreshProgram()
         {
@@ -63,12 +57,12 @@ namespace ZoomAutoRecorder
             if (spl != null)
             {
                 nudLessonNumber.Value = spl.Count();
-                spl.Select((x, y) => new { Item = x, Index = y }).ToList().ForEach(x => periods[x.Index] = x.Item);
+                spl.Select((x, y) => new { Item = x, Index = y }).ToList().ForEach(x => Periods[x.Index] = x.Item);
             }
             else
             {
                 nudLessonNumber.Value = 0;
-                periods.Clear();
+                Periods.Clear();
                 lbPeriods.Items.Clear();
             }
         }
@@ -81,21 +75,19 @@ namespace ZoomAutoRecorder
             if (nudLessonNumber.Value != 0)
             {
                 string prop = "";
-                for (int i = 0; i < periods.Count; i++)
+                for (int i = 0; i < Periods.Count; i++)
                 {
-                    if (i == 0) prop = periods[i];
-                    else prop += "|" + periods[i];
+                    if (i == 0) prop = Periods[i];
+                    else prop += "|" + Periods[i];
                 }
                 Properties.Settings.Default.LessonTime = prop;
                 Properties.Settings.Default.Save();
                 (Application.OpenForms["Main"] as Main).RefProgram();
-                MessageBox.Show("Ders programı ayarları güncellendi!", "BAŞARILI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Main.ShowInfo("Ders programı ayarları güncellendi!", "BAŞARILI");
                 this.Close();
             }
             else
-            {
-                MessageBox.Show("Lütfen değerleri düzgün girin.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                Main.ShowError("Lütfen değerleri düzgün girin.");
         }
     }
 }

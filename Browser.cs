@@ -4,6 +4,7 @@ using CefSharp.WinForms;
 using CefSharp;
 using CefSharp.Handler;
 using System.Diagnostics;
+using System.Collections;
 
 namespace ZoomAutoRecorder
 {
@@ -12,7 +13,7 @@ namespace ZoomAutoRecorder
         public ChromiumWebBrowser browser;
         public string TCKN, Pass;
         public bool isMax;
-        public Browser(string tckn, string pass, bool isMax)
+        public Browser(string tckn, string pass, bool isMax, bool isAuto = false)
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Browser));
             this.SuspendLayout();
@@ -26,28 +27,37 @@ namespace ZoomAutoRecorder
 
             TCKN = tckn;
             Pass = pass;
-            InitializeCEF();
+            InitializeCEF(isAuto);
         }
-        public void InitializeCEF()
+        public void InitializeCEF(bool auto)
         {
             if (!Cef.IsInitialized)
             {
                 CefSettings settings = new CefSettings();
                 Cef.Initialize(settings);
             }
-            browser = new ChromiumWebBrowser("https://giris.eba.gov.tr/EBA_GIRIS/giris.jsp"); //https://us04web.zoom.us/j/2292665792?pwd=NXpaYnllTlZ2YTZmdTRMSjFOV3NLUT09
+            browser = new ChromiumWebBrowser("https://giris.eba.gov.tr/EBA_GIRIS/giris.jsp");
             browser.Dock = DockStyle.Fill;
             browser.FrameLoadEnd += FrameLoadEnd;
             browser.KeyDown += Browser_KeyDown;
+            if (auto) browser.TitleChanged += Browser_TitleChanged;
             browser.RequestHandler = new CefHandler(this);
             this.Controls.Add(browser);
+        }
+        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            if (e.Title.Contains("EBA, Eğitim Bilişim Ağı, Ders, Haber"))
+            {
+                Utils.Lesson lesson = Main.Lessons.Find(x => x.ID == Utils.ZoomEntities.StartedLessonID);
+                Utils.ZoomEntities.StartLesson(Properties.Settings.Default.RecordLesson, false, lesson).Wait();
+                Main.BGWorker.isEBA = false;
+                this.Close();
+            }
         }
         private void Browser_KeyDown(object sender, KeyEventArgs e)
         {
             if (isMax && e.KeyData == Keys.F5)
-            {
                 browser.Reload(true);
-            }
         }
         private void FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
@@ -66,7 +76,7 @@ namespace ZoomAutoRecorder
                 if (request.Url.StartsWith("ebazoom") || request.Url.StartsWith("zoommtg"))
                 {
                     Debug.WriteLine("EBA Linki: " + request.Url);
-                    MainClass.EBALink = request.Url;
+                    Utils.MainClass.EBALink = request.Url;
                     Process.Start(request.Url);
                     Main.Close();
                 }
