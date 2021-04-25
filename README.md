@@ -27,16 +27,3 @@ Bu program, Zoom ve EBA derslerini/toplantılarını otomatik açmakta ve isteğ
 
 # Yasal Uyarı
 İzinsiz ses ve görüntü almak yasak olduğundan programı kullanan kişi tüm sorumluluğu üstlenmektedir. Eğer kayıt yapılacaksa program kullanılmadan önce ilgili kişilerden izinler alınmalıdır.
-
-# Program Resimleri
-
-![Ana Menü](https://i.hizliresim.com/hAD5sw.png)
-<br/>
-<br/>
-![Ayarlar](https://i.hizliresim.com/c4s4NS.png)
-<br/>
-<br/>
-![Program Ayarları](https://i.hizliresim.com/C5Z7iq.png)
-<br/>
-<br/>
-![Toplantılar](https://i.hizliresim.com/NKl5S0.png)
