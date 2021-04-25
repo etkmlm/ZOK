@@ -92,7 +92,7 @@ namespace ZoomAutoRecorder
                 nudDelay.Enabled = true;
                 nudDelay.Value = delay;
             }
-
+            chkOto_CheckedChanged(null, null);
             this.ActiveControl = label1;
         }
         private void btnDefault_Click(object sender, EventArgs e)
@@ -127,6 +127,8 @@ namespace ZoomAutoRecorder
         private void chkOto_CheckedChanged(object sender, EventArgs e)
         {
             chkOtoMod.Enabled = chkOto.Checked;
+            txtOBSPath.Enabled = chkOto.Checked;
+            btnOBS.Enabled = chkOto.Checked;
             comboDelay.Enabled = chkOto.Checked;
             comboDelay_SelectedIndexChanged(null, null);
             chkKaydet.Enabled = chkOto.Checked;
