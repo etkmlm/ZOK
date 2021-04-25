@@ -44,9 +44,9 @@ namespace ZoomAutoRecorder
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(16, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 29);
+            this.label1.Size = new System.Drawing.Size(233, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Günlük Ders Sayısı:";
+            this.label1.Text = "Günlük Top. Sayısı:";
             // 
             // nudLessonNumber
             // 
@@ -109,7 +109,7 @@ namespace ZoomAutoRecorder
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SetProgram";
-            this.Text = "Ders Programı Ayarları";
+            this.Text = "Program Ayarları";
             this.Load += new System.EventHandler(this.SetProgram_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudLessonNumber)).EndInit();
             this.ResumeLayout(false);

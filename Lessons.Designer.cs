@@ -81,7 +81,7 @@ namespace ZoomAutoRecorder
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Ders Adı";
+            this.columnHeader2.Text = "Link Adı";
             this.columnHeader2.Width = 209;
             // 
             // columnHeader3
@@ -96,23 +96,23 @@ namespace ZoomAutoRecorder
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Öğretmen";
+            this.columnHeader5.Text = "Sunucu";
             this.columnHeader5.Width = 256;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(30, 372);
+            this.label1.Location = new System.Drawing.Point(50, 372);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 29);
+            this.label1.Size = new System.Drawing.Size(104, 29);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Ders Adı:";
+            this.label1.Text = "Link Adı:";
             // 
             // txtLessonName
             // 
             this.txtLessonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtLessonName.Location = new System.Drawing.Point(147, 372);
+            this.txtLessonName.Location = new System.Drawing.Point(160, 369);
             this.txtLessonName.Name = "txtLessonName";
             this.txtLessonName.Size = new System.Drawing.Size(251, 34);
             this.txtLessonName.TabIndex = 2;
@@ -120,7 +120,7 @@ namespace ZoomAutoRecorder
             // txtZoomID
             // 
             this.txtZoomID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtZoomID.Location = new System.Drawing.Point(147, 412);
+            this.txtZoomID.Location = new System.Drawing.Point(160, 409);
             this.txtZoomID.Name = "txtZoomID";
             this.txtZoomID.Size = new System.Drawing.Size(251, 34);
             this.txtZoomID.TabIndex = 4;
@@ -129,7 +129,7 @@ namespace ZoomAutoRecorder
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(31, 412);
+            this.label2.Location = new System.Drawing.Point(44, 412);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 29);
             this.label2.TabIndex = 3;
@@ -138,7 +138,7 @@ namespace ZoomAutoRecorder
             // txtZoomPass
             // 
             this.txtZoomPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtZoomPass.Location = new System.Drawing.Point(147, 452);
+            this.txtZoomPass.Location = new System.Drawing.Point(160, 449);
             this.txtZoomPass.Name = "txtZoomPass";
             this.txtZoomPass.Size = new System.Drawing.Size(251, 34);
             this.txtZoomPass.TabIndex = 6;
@@ -147,7 +147,7 @@ namespace ZoomAutoRecorder
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(4, 452);
+            this.label3.Location = new System.Drawing.Point(17, 452);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 29);
             this.label3.TabIndex = 5;
@@ -157,16 +157,16 @@ namespace ZoomAutoRecorder
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(14, 493);
+            this.label4.Location = new System.Drawing.Point(8, 492);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 29);
+            this.label4.Size = new System.Drawing.Size(140, 29);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Öğretmen:";
+            this.label4.Text = "Sunucu Adı:";
             // 
             // txtTeacher
             // 
             this.txtTeacher.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtTeacher.Location = new System.Drawing.Point(147, 492);
+            this.txtTeacher.Location = new System.Drawing.Point(160, 489);
             this.txtTeacher.Name = "txtTeacher";
             this.txtTeacher.Size = new System.Drawing.Size(251, 34);
             this.txtTeacher.TabIndex = 8;
@@ -222,17 +222,18 @@ namespace ZoomAutoRecorder
             // btnSolve
             // 
             this.btnSolve.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSolve.Location = new System.Drawing.Point(404, 536);
+            this.btnSolve.Location = new System.Drawing.Point(417, 533);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(38, 34);
             this.btnSolve.TabIndex = 16;
             this.btnSolve.Text = "Ç";
             this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // txtLink
             // 
             this.txtLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtLink.Location = new System.Drawing.Point(147, 536);
+            this.txtLink.Location = new System.Drawing.Point(160, 533);
             this.txtLink.Name = "txtLink";
             this.txtLink.Size = new System.Drawing.Size(251, 34);
             this.txtLink.TabIndex = 18;
@@ -241,7 +242,7 @@ namespace ZoomAutoRecorder
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(78, 536);
+            this.label5.Location = new System.Drawing.Point(91, 536);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 29);
             this.label5.TabIndex = 17;
@@ -272,7 +273,7 @@ namespace ZoomAutoRecorder
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Lessons";
-            this.Text = "Dersleri Yönet";
+            this.Text = "Zoom Linklerini Yönet";
             this.Load += new System.EventHandler(this.Lessons_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

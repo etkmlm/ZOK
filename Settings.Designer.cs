@@ -209,11 +209,11 @@ namespace ZoomAutoRecorder
             // 
             this.chkOto.AutoSize = true;
             this.chkOto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chkOto.Location = new System.Drawing.Point(278, 160);
+            this.chkOto.Location = new System.Drawing.Point(246, 160);
             this.chkOto.Name = "chkOto";
-            this.chkOto.Size = new System.Drawing.Size(266, 33);
+            this.chkOto.Size = new System.Drawing.Size(314, 33);
             this.chkOto.TabIndex = 15;
-            this.chkOto.Text = "Dersi Otomatik Başlat";
+            this.chkOto.Text = "Toplantıyı Otomatik Başlat";
             this.chkOto.UseVisualStyleBackColor = true;
             this.chkOto.CheckedChanged += new System.EventHandler(this.chkOto_CheckedChanged);
             // 
@@ -233,11 +233,11 @@ namespace ZoomAutoRecorder
             // 
             this.chkKaydet.AutoSize = true;
             this.chkKaydet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chkKaydet.Location = new System.Drawing.Point(278, 238);
+            this.chkKaydet.Location = new System.Drawing.Point(246, 238);
             this.chkKaydet.Name = "chkKaydet";
-            this.chkKaydet.Size = new System.Drawing.Size(172, 33);
+            this.chkKaydet.Size = new System.Drawing.Size(220, 33);
             this.chkKaydet.TabIndex = 18;
-            this.chkKaydet.Text = "Dersi Kaydet";
+            this.chkKaydet.Text = "Toplantıyı Kaydet";
             this.chkKaydet.UseVisualStyleBackColor = true;
             this.chkKaydet.CheckedChanged += new System.EventHandler(this.chkKaydet_CheckedChanged);
             // 
@@ -257,7 +257,7 @@ namespace ZoomAutoRecorder
             // 
             this.chkOtoMod.AutoSize = true;
             this.chkOtoMod.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chkOtoMod.Location = new System.Drawing.Point(278, 199);
+            this.chkOtoMod.Location = new System.Drawing.Point(246, 199);
             this.chkOtoMod.Name = "chkOtoMod";
             this.chkOtoMod.Size = new System.Drawing.Size(128, 33);
             this.chkOtoMod.TabIndex = 20;

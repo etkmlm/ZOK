@@ -68,6 +68,7 @@ namespace ZoomAutoRecorder
             this.btnReset = new System.Windows.Forms.Button();
             this.btnBrowser = new System.Windows.Forms.Button();
             this.barDownload = new System.Windows.Forms.ProgressBar();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.contextIcon.SuspendLayout();
@@ -92,11 +93,11 @@ namespace ZoomAutoRecorder
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.ForeColor = System.Drawing.Color.Sienna;
-            this.label1.Location = new System.Drawing.Point(67, 17);
+            this.label1.Location = new System.Drawing.Point(33, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 29);
+            this.label1.Size = new System.Drawing.Size(166, 29);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Dersler";
+            this.label1.Text = "Zoom Linkleri";
             // 
             // btnLessons
             // 
@@ -549,6 +550,11 @@ namespace ZoomAutoRecorder
             this.barDownload.TabIndex = 9;
             this.barDownload.Visible = false;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "ZOK Konfigürasyon Dosyası|*.zokcfg";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -620,6 +626,7 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.ToolStripMenuItem btnLessonInfo;
         private System.Windows.Forms.ToolStripMenuItem btnStartProgramLesson;
         private System.Windows.Forms.ProgressBar barDownload;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

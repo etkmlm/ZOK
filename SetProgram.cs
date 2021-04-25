@@ -32,7 +32,7 @@ namespace ZoomAutoRecorder
             }
             lbPeriods.Items.Clear();
             for (int i = 0; i < Periods.Count; i++)
-                lbPeriods.Items.Add(i + 1 + ". Ders");
+                lbPeriods.Items.Add(i + 1 + ". Toplantı");
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace ZoomAutoRecorder
             if (!string.IsNullOrEmpty(date))
                 dateTimePicker1.Value = DateTime.Parse(date);
             else
-                dateTimePicker1.Value = new DateTime(2021, 12, 13, 0, 0, 0);
+                dateTimePicker1.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         }
         private void RefreshProgram()
         {
@@ -83,7 +83,7 @@ namespace ZoomAutoRecorder
                 Properties.Settings.Default.LessonTime = prop;
                 Properties.Settings.Default.Save();
                 (Application.OpenForms["Main"] as Main).RefProgram();
-                Main.ShowInfo("Ders programı ayarları güncellendi!", "BAŞARILI");
+                Main.ShowInfo("Program ayarları güncellendi!", "BAŞARILI");
                 this.Close();
             }
             else

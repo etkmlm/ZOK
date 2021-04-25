@@ -64,10 +64,10 @@ namespace ZoomAutoRecorder
         {
             this.Size = new Size(450, 310);
             ToolTip tip = new ToolTip();
-            tip.SetToolTip(lblDZA, "Dersin başlaması için zaman aşımı.");
-            tip.SetToolTip(lblKZA, "Ders kaydının başlaması için zaman aşımı.");
-            tip.SetToolTip(chkOtoMod, "EBA dersi açılmazsa otomatik olarak Zoom linkine girer.");
-            tip.SetToolTip(lblD, "Dersin kontrolü için gecikme. (Gecikme ile performans doğru orantılıdır.)");
+            tip.SetToolTip(lblDZA, "Toplantının başlaması için zaman aşımı.");
+            tip.SetToolTip(lblKZA, "Toplantı kaydının başlaması için zaman aşımı.");
+            tip.SetToolTip(chkOtoMod, "EBA açılmazsa otomatik olarak Zoom linkine girer.");
+            tip.SetToolTip(lblD, "Zaman kontrolü için gecikme. (Gecikme ile performans doğru orantılıdır.)");
 
             txtZoomPath.Text = Properties.Settings.Default.ZoomPath;
             txtOBSPath.Text = Properties.Settings.Default.OBSPath;

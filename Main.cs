@@ -23,6 +23,7 @@ namespace ZoomAutoRecorder
         public static Database.General Manager;
         public static ZoomEntities ZoomEntities;
         public static BGWorker BGWorker;
+        public static ConfigManagement Cfg;
         
         string day = "";
         ListBox lbToday => Controls.Find($"lb{day}", true)[0] as ListBox;
@@ -37,6 +38,7 @@ namespace ZoomAutoRecorder
             Manager = new Database.General();
             ZoomEntities = new ZoomEntities();
             BGWorker = new BGWorker(ref backgroundWorker1);
+            Cfg = new ConfigManagement();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -47,11 +49,12 @@ namespace ZoomAutoRecorder
             Manager.Update.CheckUpdate();
             ToolTip tip = new ToolTip();
             tip.SetToolTip(btnReset, "Yenile");
-            tip.SetToolTip(btnProgramSettings, "Ders Programı Ayarları");
+            tip.SetToolTip(btnProgramSettings, "Program Ayarları");
             tip.SetToolTip(barDownload, "Yeni sürüm indiriliyor...");
         }
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //notify.BalloonTipClosed += (s, f) => { var thisIcon = (NotifyIcon)s; thisIcon.Visible = false; thisIcon.Dispose(); };
             notify.Visible = false;
             notify.Icon = null;
             notify.Dispose();
@@ -129,20 +132,37 @@ namespace ZoomAutoRecorder
         {
             if (Properties.Settings.Default.AutoStart)
             {
-                btnAutoZoom.Text = "Otomatik Dersi Durdur";
+                btnAutoZoom.Text = "Otomatik Toplantıyı Durdur";
                 BGWorker.isCancel = false;
                 if (!backgroundWorker1.IsBusy) backgroundWorker1.RunWorkerAsync();
             }
             else
             {
-                btnAutoZoom.Text = "Otomatik Dersi Başlat";
+                btnAutoZoom.Text = "Otomatik Toplantıyı Başlat";
                 BGWorker.isCancel = true;
             }
         }
         
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            MainClass.OpenForm(new Settings());
+            if (Control.ModifierKeys == Keys.Shift) //YEDEKLE
+            {
+                Cfg.BackupConfig();
+                ShowInfo("Yedekleme başarılı.", "BAŞARILI");
+            }
+            else if (Control.ModifierKeys == Keys.Control) //YEDEKTEN GERİ YÜKLE
+            {
+                openFileDialog1.InitialDirectory = System.IO.Path.Combine(Application.StartupPath, "Backups");
+                var dialog = openFileDialog1.ShowDialog();
+                if (dialog != DialogResult.OK) return;
+
+                string path = openFileDialog1.FileName;
+                Cfg.RestoreConfig(path);
+                RefProgram();
+                ShowInfo("Geri yükleme başarılı.", "BAŞARILI");
+            }
+            else
+                MainClass.OpenForm(new Settings());
         }
         private void btnLessons_Click(object sender, EventArgs e)
         {
@@ -195,7 +215,7 @@ namespace ZoomAutoRecorder
             builder.AppendLine("Adı: Zoom Otomatik Kaydedici");
             builder.AppendLine("Sürüm: " + MainClass.version);
             builder.AppendLine("Firma: Corelium Development INC");
-            builder.AppendLine("Geliştirici: Furkan M Yılmaz");
+            builder.AppendLine("Geliştirici: F.M. Yılmaz");
             builder.AppendLine("Tüm Hakları Saklıdır @ 2021");
 
             ShowInfo(builder.ToString(), "Z.O.K. Hakkında");
@@ -419,11 +439,11 @@ namespace ZoomAutoRecorder
             if (Selected.SelectedItem.ToString() != "Boş")
             {
                 Lesson lesson = Lessons.FirstOrDefault(x => x.Name == Selected.SelectedItem.ToString());
-                builder.AppendLine("Ders Adı: " + lesson.Name);
+                builder.AppendLine("Toplantı Adı: " + lesson.Name);
                 builder.AppendLine("Öğretmen: " + lesson.Teacher);
             }
             builder.AppendLine("Başlama Saati: " + DateTime.Parse(Properties.Settings.Default.LessonTime.Split('|')[Selected.SelectedIndex]).ToString("HH.mm"));
-            ShowInfo(builder.ToString(), "DERS HAKKINDA");
+            ShowInfo(builder.ToString(), "TOPLANTI HAKKINDA");
             Selected.SelectedIndex = -1;
         }
         private void btnStartProgramLesson_Click(object sender, EventArgs e)

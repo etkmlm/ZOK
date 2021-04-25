@@ -13,7 +13,7 @@ namespace ZoomAutoRecorder.Utils
     {
         public bool isStarted, isEBA, isCancel = false;
         public int ix = -1;
-        int delay;
+        public int delay;
 
         Main Main
         {
@@ -21,35 +21,39 @@ namespace ZoomAutoRecorder.Utils
         }
         public BGWorker(ref BackgroundWorker worker)
         {
-            worker.RunWorkerCompleted += Worker_Completed;
             worker.DoWork += Worker_Work;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             delay = Properties.Settings.Default.WorkerDelay;
         }
-        private void Worker_Completed(object sender, RunWorkerCompletedEventArgs e)
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Main.ShowBalloon("Uyarı", "Otomatik ders özelliği kapatıldı!");
+            Main.ShowBalloon("Uyarı", "Otomatik başlatma durduruldu!", 1000);
         }
+
         private void Worker_Work(object sender, DoWorkEventArgs e)
         {
             while (!isCancel)
             {
-                delay = Properties.Settings.Default.WorkerDelay;
+                
                 int day = (int)DateTime.Now.DayOfWeek;
                 ListBox lb = Main.Controls.Find("lb" + Main.Days[day], true)[0] as ListBox;
 
                 string hour = DateTime.Now.ToString("HH.mm");
+                if (string.IsNullOrEmpty(Properties.Settings.Default.LessonTime)) continue;
                 List<string> times = Properties.Settings.Default.LessonTime.Split('|').ToList();
-
+                
                 if (!isStarted)
                 {
+                    delay = Properties.Settings.Default.WorkerDelay;
                     ix = times.FindIndex(x => DateTime.Parse(x).ToString("HH.mm") == hour);
                     if (ix >= 0 && lb.Items[ix].ToString() != "Boş" && !MainClass.OnceDontOpen.Any(x => x == ix))
                     {
                         Lesson lesson = Main.Lessons.FirstOrDefault(x => x.Name == lb.Items[ix].ToString());
                         Main.ShowBalloon(
-                            $"{lesson.Name} Dersi Başladı!",
-                            $"Otomatik ders başlatma özelliği açık olduğundan ders otomatik başlatılıyor." +
-                            $"\nÖğretmen: {lesson.Teacher}");
+                            $"{lesson.Name} Toplantısı Başladı!",
+                            $"Otomatik başlatma özelliği açık olduğundan toplantı otomatik başlatılıyor." +
+                            $"\nSunucu: {lesson.Teacher}");
 
                         isEBA = Main.Manager.GetEBAState(lesson.ID, day, ix);
                         ZoomEntities.StartLesson(true, isEBA, lesson, true).Wait();

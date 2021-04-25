@@ -41,15 +41,20 @@ namespace ZoomAutoRecorder
         }
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(btnSolve.Text)) return;
+            try
+            {
+                string part = txtLink.Text.Split('/')[4];
+                string id = part.Split('?')[0];
+                string pass = part.Split('?')[1].Replace("pwd=", "");
 
-            string part = txtLink.Text.Split('/')[4];
-            string id = part.Split('?')[0];
-            string pass = part.Split('?')[1].Replace("pwd=", "");
-
-            txtZoomID.Text = id;
-            txtZoomPass.Text = pass;
-            txtLink.Clear();
+                txtZoomID.Text = id;
+                txtZoomPass.Text = pass;
+                txtLink.Clear();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
         }
         private void lvLessons_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -72,7 +77,7 @@ namespace ZoomAutoRecorder
                 !string.IsNullOrWhiteSpace(teacher))
             {
                 if (Manager.CheckDup(lesson_name))
-                    Main.ShowError("Bu isme sahip bir ders daha var!");
+                    Main.ShowError("Bu isme sahip bir zoom linki daha var!");
                 else
                 {
                     Manager.AddLesson(lesson_name, zoomid, zoompass, teacher);

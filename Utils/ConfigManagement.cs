@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZoomAutoRecorder.Utils
 {
-    class ConfigManagement
+    public class ConfigManagement
     {
         const string ConfigName = "Backup{0}.zokcfg";
         string BackupsPath;
