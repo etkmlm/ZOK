@@ -47,16 +47,33 @@ namespace ZoomAutoRecorder.Utils
                 {
                     delay = Properties.Settings.Default.WorkerDelay;
                     ix = times.FindIndex(x => DateTime.Parse(x).ToString("HH.mm") == hour);
-                    if (ix >= 0 && lb.Items[ix].ToString() != "Boş" && !MainClass.OnceDontOpen.Any(x => x == ix))
+                    bool condition, addi = false;
+                    if (ix >= 0)
                     {
-                        Lesson lesson = Main.Lessons.FirstOrDefault(x => x.Name == lb.Items[ix].ToString());
+                        addi = false;
+                        condition = lb.Items[ix].ToString() != "Boş" && !MainClass.OnceDontOpen.Any(x => x == ix);
+                    }
+                    else
+                    {
+                        ix = MainClass.DailyMeetings.FindIndex(x => x.Time == hour);
+                        if (ix >= 0)
+                            addi = condition = true;
+                        else
+                            condition = false;
+                    }
+                    
+                    if (condition)
+                    {
+                        LessonPeriod period = MainClass.DailyMeetings[ix];
+                        Lesson lesson = addi ? period.Lesson : Main.Lessons.FirstOrDefault(x => x.Name == lb.Items[ix].ToString());
                         Main.ShowBalloon(
                             $"{lesson.Name} Toplantısı Başladı!",
                             $"Otomatik başlatma özelliği açık olduğundan toplantı otomatik başlatılıyor." +
                             $"\nSunucu: {lesson.Teacher}");
 
-                        isEBA = Main.Manager.GetEBAState(lesson.ID, day, ix);
-                        ZoomEntities.StartLesson(true, isEBA, lesson, true).Wait();
+                        isEBA = addi ? period.IsEBA : Main.Manager.GetEBAState(lesson.ID, day, ix);
+                        bool record = addi ? period.AutoRecord : Properties.Settings.Default.RecordLesson;
+                        ZoomEntities.StartLesson(record, isEBA, lesson, true).Wait();
                         ZoomEntities.StartedLessonID = lesson.ID;
                         isStarted = true;
                         delay = 5300;

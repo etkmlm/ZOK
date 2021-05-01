@@ -69,6 +69,7 @@ namespace ZoomAutoRecorder
             this.btnBrowser = new System.Windows.Forms.Button();
             this.barDownload = new System.Windows.Forms.ProgressBar();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnAdditional = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.contextIcon.SuspendLayout();
@@ -523,7 +524,7 @@ namespace ZoomAutoRecorder
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnReset.Location = new System.Drawing.Point(1169, 4);
+            this.btnReset.Location = new System.Drawing.Point(1092, 4);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(47, 39);
             this.btnReset.TabIndex = 7;
@@ -534,7 +535,7 @@ namespace ZoomAutoRecorder
             // btnBrowser
             // 
             this.btnBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnBrowser.Location = new System.Drawing.Point(1067, 4);
+            this.btnBrowser.Location = new System.Drawing.Point(990, 4);
             this.btnBrowser.Name = "btnBrowser";
             this.btnBrowser.Size = new System.Drawing.Size(96, 39);
             this.btnBrowser.TabIndex = 8;
@@ -544,7 +545,7 @@ namespace ZoomAutoRecorder
             // 
             // barDownload
             // 
-            this.barDownload.Location = new System.Drawing.Point(903, 4);
+            this.barDownload.Location = new System.Drawing.Point(826, 4);
             this.barDownload.Name = "barDownload";
             this.barDownload.Size = new System.Drawing.Size(158, 39);
             this.barDownload.TabIndex = 9;
@@ -555,11 +556,23 @@ namespace ZoomAutoRecorder
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "ZOK Konfigürasyon Dosyası|*.zokcfg";
             // 
+            // btnAdditional
+            // 
+            this.btnAdditional.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnAdditional.Location = new System.Drawing.Point(1145, 4);
+            this.btnAdditional.Name = "btnAdditional";
+            this.btnAdditional.Size = new System.Drawing.Size(71, 39);
+            this.btnAdditional.TabIndex = 10;
+            this.btnAdditional.Text = "EK";
+            this.btnAdditional.UseVisualStyleBackColor = true;
+            this.btnAdditional.Click += new System.EventHandler(this.btnAdditional_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 574);
+            this.Controls.Add(this.btnAdditional);
             this.Controls.Add(this.barDownload);
             this.Controls.Add(this.btnBrowser);
             this.Controls.Add(this.btnReset);
@@ -627,6 +640,7 @@ namespace ZoomAutoRecorder
         private System.Windows.Forms.ToolStripMenuItem btnStartProgramLesson;
         private System.Windows.Forms.ProgressBar barDownload;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnAdditional;
     }
 }
 

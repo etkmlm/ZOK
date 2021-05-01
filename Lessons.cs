@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using ZoomAutoRecorder.Utils;
+using System.Text.RegularExpressions;
 
 namespace ZoomAutoRecorder
 {
@@ -21,6 +22,17 @@ namespace ZoomAutoRecorder
             Manager = new Database.Lesson();
         }
 
+        private void RefreshOut()
+        {
+            Main.Manager.RefLessons();
+            (Application.OpenForms["Main"] as Main).RefProgram();
+            var addi = Application.OpenForms["AdditionalProgram"] as AdditionalProgram;
+            if (addi != null)
+            {
+                addi.ops.RefreshLessons();
+                addi.ops.RefreshList();
+            }
+        }
         private void Clear()
         {
             lvLessons.Items.Clear();
@@ -74,7 +86,8 @@ namespace ZoomAutoRecorder
             if (!string.IsNullOrWhiteSpace(lesson_name) && 
                 !string.IsNullOrWhiteSpace(zoomid) && 
                 !string.IsNullOrWhiteSpace(zoompass) && 
-                !string.IsNullOrWhiteSpace(teacher))
+                !string.IsNullOrWhiteSpace(teacher) &&
+                Regex.IsMatch(zoomid, @"^\d+$"))
             {
                 if (Manager.CheckDup(lesson_name))
                     Main.ShowError("Bu isme sahip bir zoom linki daha var!");
@@ -83,11 +96,9 @@ namespace ZoomAutoRecorder
                     Manager.AddLesson(lesson_name, zoomid, zoompass, teacher);
                     Clear();
                     Manager.RefreshLessons();
-                    Main.Manager.RefLessons();
+                    RefreshOut();
                 }
             }
-            else
-                Main.ShowError("Hiçbir alan boş bırakılamaz!");
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -96,8 +107,7 @@ namespace ZoomAutoRecorder
             Manager.DeleteLesson(id);
             Clear();
             Manager.RefreshLessons();
-            Main.Manager.RefLessons();
-            (Application.OpenForms["Main"] as Main).RefProgram();
+            RefreshOut();
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -109,14 +119,14 @@ namespace ZoomAutoRecorder
                 !string.IsNullOrWhiteSpace(lesson_name) && 
                 !string.IsNullOrWhiteSpace(zoomid) && 
                 !string.IsNullOrWhiteSpace(zoompass) && 
-                !string.IsNullOrWhiteSpace(teacher))
+                !string.IsNullOrWhiteSpace(teacher) &&
+                Regex.IsMatch(zoomid, @"^\d+$"))
             {
                 int id = int.Parse(lvLessons.SelectedItems[0].SubItems[0].Text);
                 Manager.UpdateLesson(id, lesson_name, zoomid, zoompass, teacher);
                 Clear();
                 Manager.RefreshLessons();
-                Main.Manager.RefLessons();
-                (Application.OpenForms["Main"] as Main).RefProgram();
+                RefreshOut();
             }
         }
         private void lvLessons_KeyDown(object sender, KeyEventArgs e)

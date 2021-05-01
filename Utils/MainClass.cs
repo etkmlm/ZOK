@@ -16,6 +16,7 @@ namespace ZoomAutoRecorder.Utils
         
         public static string EBALink;
         public static List<int> OnceDontOpen = new List<int>();
+        public static List<LessonPeriod> DailyMeetings = new List<LessonPeriod>();
 
         public static void OpenForm(Form frm)
         {

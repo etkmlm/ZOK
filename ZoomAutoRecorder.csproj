@@ -110,6 +110,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdditionalProgram.Designer.cs">
+      <DependentUpon>AdditionalProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Browser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     <Compile Include="Utils\Database.cs" />
     <Compile Include="Utils\Update.cs" />
     <Compile Include="Utils\ZoomEntities.cs" />
+    <EmbeddedResource Include="AdditionalProgram.resx">
+      <DependentUpon>AdditionalProgram.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>

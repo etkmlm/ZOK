@@ -17,6 +17,13 @@ namespace ZoomAutoRecorder.Utils
         public string Name { get; set; }
         public string Teacher { get; set; }
     }
+    public struct LessonPeriod
+    {
+        public Lesson Lesson { get; set; }
+        public string Time { get; set; }
+        public bool IsEBA { get; set; }
+        public bool AutoRecord { get; set; }
+    }
     public class ZoomEntities
     {
         public static int StartedLessonID = -1;

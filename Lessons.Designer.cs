@@ -81,7 +81,7 @@ namespace ZoomAutoRecorder
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Link Adı";
+            this.columnHeader2.Text = "Toplantı Adı";
             this.columnHeader2.Width = 209;
             // 
             // columnHeader3

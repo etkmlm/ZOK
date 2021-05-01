@@ -467,5 +467,13 @@ namespace ZoomAutoRecorder
             }
             Selected.SelectedIndex = -1;
         }
+
+        private void btnAdditional_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.AutoStart)
+                MainClass.OpenForm(new AdditionalProgram());
+            else
+                ShowError("Bu özelliğin kullanılabilmesi için otomatik toplantı özelliğinin aktif olması gerekmektedir.");
+        }
     }
 }
