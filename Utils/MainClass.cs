@@ -12,7 +12,7 @@ namespace ZoomAutoRecorder.Utils
     class MainClass
     {
         public const string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Database.mdb";
-        public const string version = "0.91";
+        public const string version = "0.92";
         
         public static string EBALink;
         public static List<int> OnceDontOpen = new List<int>();

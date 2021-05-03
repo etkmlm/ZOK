@@ -51,13 +51,15 @@ namespace ZoomAutoRecorder
         private void btnZoom_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = txtZoomPath.Text;
-            openFileDialog1.ShowDialog();
+            var d = openFileDialog1.ShowDialog();
+            if (d != DialogResult.OK) return;
             txtZoomPath.Text = openFileDialog1.FileName;
         }
         private void btnOBS_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = txtOBSPath.Text;
-            openFileDialog1.ShowDialog();
+            var d = openFileDialog1.ShowDialog();
+            if (d != DialogResult.OK) return;
             txtOBSPath.Text = openFileDialog1.FileName;
         }
         private void Settings_Load(object sender, EventArgs e)
@@ -111,7 +113,7 @@ namespace ZoomAutoRecorder
         {
             bool s = Save();
             if (!s) return;
-            Main.ShowInfo("Ayarlarınız kaydedildi!", "BİLGİLENDİRME");
+            Main.ShowInfo("Ayarlarınız kaydedildi! (Bazı değişikliklerin uygulanması için uygulamanın yeniden başlatılması gerekebilir.)", "BİLGİLENDİRME");
             this.Close();
         }
         private void chkKaydet_CheckedChanged(object sender, EventArgs e)

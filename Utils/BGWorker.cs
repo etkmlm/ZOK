@@ -11,7 +11,7 @@ namespace ZoomAutoRecorder.Utils
 {
     public class BGWorker
     {
-        public bool isStarted, isEBA, isCancel = false;
+        public bool isStarted = false, isEBA = false;
         public int ix = -1;
         public int delay;
 
@@ -22,20 +22,13 @@ namespace ZoomAutoRecorder.Utils
         public BGWorker(ref BackgroundWorker worker)
         {
             worker.DoWork += Worker_Work;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             delay = Properties.Settings.Default.WorkerDelay;
-        }
-
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Main.ShowBalloon("Uyarı", "Otomatik başlatma durduruldu!", 1000);
         }
 
         private void Worker_Work(object sender, DoWorkEventArgs e)
         {
-            while (!isCancel)
+            while (true)
             {
-                
                 int day = (int)DateTime.Now.DayOfWeek;
                 ListBox lb = Main.Controls.Find("lb" + Main.Days[day], true)[0] as ListBox;
 
@@ -64,7 +57,7 @@ namespace ZoomAutoRecorder.Utils
                     
                     if (condition)
                     {
-                        LessonPeriod period = MainClass.DailyMeetings[ix];
+                        LessonPeriod period = addi ? MainClass.DailyMeetings[ix] : default;
                         Lesson lesson = addi ? period.Lesson : Main.Lessons.FirstOrDefault(x => x.Name == lb.Items[ix].ToString());
                         Main.ShowBalloon(
                             $"{lesson.Name} Toplantısı Başladı!",
@@ -108,7 +101,6 @@ namespace ZoomAutoRecorder.Utils
                 }
                 System.Threading.Thread.Sleep(delay);
             }
-            e.Cancel = isCancel;
         }
     }
 }

@@ -497,10 +497,6 @@ namespace ZoomAutoRecorder
             this.btnAppClose.Text = "Kapat";
             this.btnAppClose.Click += new System.EventHandler(this.btnAppClose_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            // 
             // notify
             // 
             this.notify.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;

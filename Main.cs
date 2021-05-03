@@ -133,13 +133,11 @@ namespace ZoomAutoRecorder
             if (Properties.Settings.Default.AutoStart)
             {
                 btnAutoZoom.Text = "Otomatik Toplantıyı Durdur";
-                BGWorker.isCancel = false;
                 if (!backgroundWorker1.IsBusy) backgroundWorker1.RunWorkerAsync();
             }
             else
             {
                 btnAutoZoom.Text = "Otomatik Toplantıyı Başlat";
-                BGWorker.isCancel = true;
             }
         }
         
@@ -223,6 +221,7 @@ namespace ZoomAutoRecorder
         private void btnAutoZoom_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.AutoStart = !Properties.Settings.Default.AutoStart;
+            ShowInfo("Değişikliklerin uygulanması için uygulamayı yeniden başlatmanız gerekmektedir.", "UYARI");
             RefBG();
         }
         private void btnReset_Click(object sender, EventArgs e)
