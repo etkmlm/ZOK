@@ -3,6 +3,10 @@ No English support :(
 # Zoom Otomatik Kaydedici (ZOK)
 Bu program, Zoom ve EBA derslerini/toplantılarını otomatik açmakta ve isteğe bağlı olarak OBS Studio aracılığıyla kaydetmektedir. Zaman periyodları ayarlanarak kolayca kullanılabilir.
 
+# Gereklilikler
+1. .NET Framework 4.7.2
+2. C++ Redistributable 2013-2015
+
 # Nasıl Kurulur?
 1. Program ilk açıldığı zaman önce "P.A." butonuna basılır. 
 2. Yukarıdaki kutucuğa gün içindeki toplantı sayısı yazılarak aşağıdaki listeden başlangıç saatleri ayarlanır. "KAYDET" butonuna basılarak değişiklikler kaydedilir.
